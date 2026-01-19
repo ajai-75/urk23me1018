@@ -1,0 +1,49 @@
+package EXP4;
+import java.util.Scanner;
+class Person {
+    String name;
+    int age;
+    // Receive the Scanner object as a parameter
+    void getPersonDetails(Scanner sc) {
+        System.out.print("Enter Name: ");
+        name = sc.nextLine();
+        System.out.print("Enter Age: ");
+        age = sc.nextInt();
+        sc.nextLine(); // Fix: Consume the leftover newline
+    }
+    void displayPersonDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+class Student extends Person {
+    int regNo;
+    String department;
+    // Receive the Scanner object as a parameter
+    void getStudentDetails(Scanner sc) {
+        System.out.print("Enter Register Number: ");
+        regNo = sc.nextInt();
+        sc.nextLine(); // Fix: Consume the leftover newline
+        System.out.print("Enter Department: ");
+        department = sc.nextLine();
+    }
+    void displayStudentDetails() {
+        displayPersonDetails(); // Reuses parent display
+        System.out.println("Register Number: " + regNo);
+        System.out.println("Department: " + department);
+    }
+}
+public class InheritanceDemo {
+    public static void main(String[] args) {
+        // Create the Scanner ONLY ONCE here
+        Scanner sc = new Scanner(System.in);
+        Student s = new Student();
+        // Pass the scanner to the methods
+        System.out.println("--- Enter Student Details ---");
+        s.getPersonDetails(sc);   
+        s.getStudentDetails(sc);  
+        System.out.println("\n--- Displaying Details ---");
+        s.displayStudentDetails();
+        sc.close(); // Good practice: Close scanner at the very end
+    }
+}
